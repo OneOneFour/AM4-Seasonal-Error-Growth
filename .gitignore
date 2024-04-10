@@ -1,6 +1,8 @@
 env
 *.png
-DFJ/
+*.gif
+*.mp4
+DJF/
 JJA/
 MAM/
 SON/
