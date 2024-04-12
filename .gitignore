@@ -1,8 +1,2 @@
 env
-*.png
-*.gif
-*.mp4
-DJF/
-JJA/
-MAM/
-SON/
+.ipynb_checkpoints/
