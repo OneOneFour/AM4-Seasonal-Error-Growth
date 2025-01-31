@@ -1,0 +1,39 @@
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_code.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/gsn_csm.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/contributed.ncl"
+load "$NCARG_ROOT/lib/ncarg/nclscripts/csm/diagnostics_cam.ncl"
+
+
+
+case     = "ERA5:2022-2024:"  
+diro     = "./"        ; output dir: location of plots 
+
+latN     = 15
+latS     = -latN       ; symmetric about the equator
+
+nDayWin  = 96      ; Wheeler-Kiladis [WK] temporal window length (days)
+nDaySkip = 30      ; time (days) between temporal windows [segments]
+                    ; negative means there will be overlapping 
+                    ; temporal segments
+
+opt      = True
+opt@debug= True
+opt@pltType     = "png"   ; send graphics to PNG file
+opt@cnLinesOn   = False   ; turn off contour lines
+                    ; specify the plot intervals
+
+spd      = 4       ; samples per day (6 hour sampling rate)
+var      = "mtnlwf"  ; user specified 
+
+
+file_path = "/scratch/users/robcking/ERA5_OLR/olr_mean.grib"
+f = addfile(file_path, "r")
+olr = f->mtnlwrf
+olr = -1*olr
+olr = 
+f        = addfile (diri+fili, "r") 
+omega    = f->omega(:,0,{latS:latN},:)     ; (time,lat,lon)
+
+                     ; calculation and create plots
+wkSpaceTime (omega, diro, case, var             \
+            ,latN, spd, nDayWin, nDaySkip, opt  )
