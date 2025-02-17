@@ -1,2 +1,7 @@
 env
 .ipynb_checkpoints/
+figures/ 
+old/
+icon_fix/
+jan/
+jul/
